@@ -26,13 +26,18 @@ function App() {
 
       ctx.clearRect(0,0, videoWidth, videoHeight);
       ctx.drawImage(model.image, 0,0, videoWidth, videoHeight);
-      console.log(model);
       if(model.multiHandLandmarks){
+        let i = 0;
         for(const landmarks of model.multiHandLandmarks){
-          drawConnectors(ctx, landmarks, hands.HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
-          drawLandmarks(ctx, landmarks, {color: '#FF0000', lineWidth: 2});
-
-        
+          console.log(landmarks[5].x*videoWidth, landmarks[5].y*videoHeight);
+          //drawConnectors(ctx, landmarks, hands.HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
+          //drawLandmarks(ctx, landmarks, {color: '#EEEE00', lineWidth: 2});
+          const image = new Image();
+          image.src =
+            "https://upload.wikimedia.org/wikipedia/commons/2/25/Alice_%28apple%29.jpg";
+          image.onload = () => {
+            ctx.drawImage(image, landmarks[8].x*videoWidth, (landmarks[8].y*videoHeight)-50, 25, 25);
+          };
         }
       }
     }
